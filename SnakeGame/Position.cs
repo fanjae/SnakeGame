@@ -1,6 +1,6 @@
 ﻿namespace SnakeGame
 {    
-    struct Position
+    struct Position // 좌표값 구조체
     {
         private int x;
         private int y;
