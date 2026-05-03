@@ -11,23 +11,23 @@
             prev = null;
             next = null;
         }
-        public void setPrev(Node node)
+        public void setPrev(Node node) // 이전 위치 설정
         {
             this.prev = node;
         }
-        public void setNext(Node node)
+        public void setNext(Node node) // 다음 위치 설정
         {
             this.next = node;
         }
-        public Node getPrev()
+        public Node getPrev() // 이전값 반환
         {
             return prev;
         }
-        public Node getNext()
+        public Node getNext() // 다음값 반환
         {
             return next;
         }
-        public Position getPosition()
+        public Position getPosition() // 위치값 반환
         {
             return value;
         }
