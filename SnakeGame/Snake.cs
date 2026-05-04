@@ -26,22 +26,23 @@ namespace SnakeGame
                 currentDirection = newDirection;
             }  
         }
-        public Direction GetDirection()
+
+        public Direction CurrentDirection
         {
-            return currentDirection;
+            get { return currentDirection; }
         }
 
-        public Position GetHeadPosition() // 헤드 정보 얻어오기
+        public Position HeadPosition // 헤드 정보 얻어오기
         {
-            return SnakeBody.GetHeadPosition();
+            get { return SnakeBody.HeadPosition; }
         }
 
         public Position GetNextHeadPosition() // 다음 헤드 정보 얻어오기
         {
-            Position head = SnakeBody.GetHeadPosition();
+            Position head = SnakeBody.HeadPosition;
 
-            int x = head.GetX();
-            int y = head.GetY();
+            int x = head.X;
+            int y = head.Y;
 
             switch(currentDirection)
             {
@@ -64,7 +65,7 @@ namespace SnakeGame
         public void Move(bool foodEat) // 이동
         {
             Position nextHead = GetNextHeadPosition();
-            SnakeBody.AddFront(nextHead.GetX(), nextHead.GetY());
+            SnakeBody.AddFront(nextHead.X, nextHead.Y);
 
             if(!foodEat)
             {

@@ -22,8 +22,8 @@
             }
             else
             {
-                temp.setNext(head); // 기존 head값은 신규 데이터의 next가 됨.
-                head.setPrev(temp); // 기존 head의 이전 값은 신규 데이터가 됨. 
+                temp.Next = head; // 기존 head값은 신규 데이터의 next가 됨.
+                head.Prev = temp; // 기존 head의 이전 값은 신규 데이터가 됨. 
                 head = temp; // head 교체
             }
             count++;
@@ -44,16 +44,16 @@
                 }
                 else
                 {
-                    tail = tail.getPrev(); // tail을 이전 값으로 대체
-                    temp.setPrev(null);
-                    tail.setNext(null);
+                    tail = tail.Prev; // tail을 이전 값으로 대체
+                    temp.Prev = null;
+                    tail.Next = null;
                 }
                 count--;
             }
         }
-        public Position GetHeadPosition() // 헤드값 좌표 위치 반환
+        public Position HeadPosition // 헤드값 좌표 위치 반환
         {
-            return head.getPosition();
+            get { return head.NodePos; }
         }
 
         public Position[] GetPositions() // 좌표 값 목록 전체 가져오기
@@ -62,14 +62,15 @@
             {
                 return null;
             }
+
             Position[] positions = new Position[count];
             Node cursor = head;
             int cnt = 0;
 
             while(cursor != null)
             {
-                positions[cnt++] = cursor.getPosition();
-                cursor = cursor.getNext();
+                positions[cnt++] = cursor.NodePos;
+                cursor = cursor.Next;
             }
             return positions;
         }

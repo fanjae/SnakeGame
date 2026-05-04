@@ -15,14 +15,14 @@
 
             Console.Clear();
             Console.SetCursorPosition(0, 0);
-            gameBoard.PrintBoard(snake.GetDirection());
+            gameBoard.PrintBoard(snake.CurrentDirection);
         }
         public void RenderBoard() // 보드 렌더링 요청
         {
             gameBoard.ClearSnake();
             gameBoard.UpdateSnakeBoard(snake.GetBodyPositions());
             Console.SetCursorPosition(0, 0); // 커서 고정으로 출력 상태 유지
-            gameBoard.PrintBoard(snake.GetDirection());
+            gameBoard.PrintBoard(snake.CurrentDirection);
         }
         public void PlayGame()
         {
@@ -34,7 +34,7 @@
             InitGame();
             while (true)
             {
-                new_dir = snake.GetDirection();
+                new_dir = snake.CurrentDirection;
                 if(Console.KeyAvailable)
                 {
                     input_key = Console.ReadKey();

@@ -47,6 +47,7 @@ namespace SnakeGame
             if (this.x <= x || this.y <= y) return false;
             return true;
         }
+
         public string GetSnakeHeadMark(Direction currentDirection)
         {
             return direction_mark[(int)currentDirection];
@@ -100,23 +101,23 @@ namespace SnakeGame
         {
             for(int i=0; i<positions.Length; i++) 
             {
-                if (i == 0) gameBoard[positions[i].GetX(), positions[i].GetY()] = (int)BoardSet.SnakeHead;
-                else gameBoard[positions[i].GetX(), positions[i].GetY()] = (int)BoardSet.SnakeBody;
+                if (i == 0) gameBoard[positions[i].X, positions[i].Y] = (int)BoardSet.SnakeHead;
+                else gameBoard[positions[i].X, positions[i].Y] = (int)BoardSet.SnakeBody;
             }
         }
         public bool IsFood(Position Target) // 먹이 확인
         {
-            return gameBoard[Target.GetX(), Target.GetY()] == (int)BoardSet.Food;
+            return gameBoard[Target.X, Target.Y] == (int)BoardSet.Food;
         }
 
         private bool IsWall(Position Target) // 벽 위치 확인
         {
-            return gameBoard[Target.GetX(), Target.GetY()] == (int)BoardSet.Wall;
+            return gameBoard[Target.X, Target.Y] == (int)BoardSet.Wall;
         }
 
         private bool IsSnakeBody(Position Target) // 스네이크 몸체 확인
         {
-            return gameBoard[Target.GetX(), Target.GetY()] == (int)BoardSet.SnakeBody;
+            return gameBoard[Target.X, Target.Y] == (int)BoardSet.SnakeBody;
         }
 
         public bool IsCrash(Position Target) // 벽이거나 스네이크의 몸을 만났으면 충돌.
