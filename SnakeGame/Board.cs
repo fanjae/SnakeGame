@@ -8,16 +8,24 @@ namespace SnakeGame
 {
     internal class Board
     {
-        private int[,] gameBoard;
+        private CellType[,] gameBoard;
         private int x;
         private int y;
         private Random rand;
         private string[] direction_mark = { "▲", "◀", "▼", "▶" };
 
-        enum BoardSet { Wall=1, Normal, SnakeBody, SnakeHead, Food };
+        private enum CellType
+        {
+            Wall,
+            Empty,
+            SnakeBody,
+            SnakeHead,
+            Food
+        }
+
         public Board(int x, int y)
         {
-            gameBoard = new int[x, y];
+            gameBoard = new CellType[x, y];
             this.x = x;
             this.y = y;
             rand = new Random();
@@ -32,11 +40,11 @@ namespace SnakeGame
                 {
                     if (i == 0 || i == x - 1 || j == 0 || j == y - 1)
                     {
-                        gameBoard[i, j] = (int)BoardSet.Wall;
+                        gameBoard[i, j] = CellType.Wall;
                     }
                     else
                     {
-                        gameBoard[i, j] = (int)BoardSet.Normal;
+                        gameBoard[i, j] = CellType.Empty;
                     }
                 }
             }
@@ -60,19 +68,19 @@ namespace SnakeGame
                 {
                     switch (gameBoard[i,j]) 
                     {
-                        case (int)BoardSet.Wall: // 벽
+                        case CellType.Wall: // 벽
                             Console.Write("▣");
                             break;
-                        case (int)BoardSet.Normal: // 일반 칸
+                        case CellType.Empty: // 일반 칸
                             Console.Write("□");
                             break;
-                        case (int)BoardSet.SnakeBody: // 몸체
+                        case CellType.SnakeBody: // 몸체
                             Console.Write("■");
                             break;
-                        case (int)BoardSet.SnakeHead: // 머리
+                        case CellType.SnakeHead: // 머리
                             Console.Write(GetSnakeHeadMark(currentDirection));
                             break;
-                        case (int)BoardSet.Food: // 음식
+                        case CellType.Food: // 음식
                             Console.Write("●");
                             break;
                         default:
@@ -89,9 +97,9 @@ namespace SnakeGame
             {
                 for(int j=0; j<y; j++)
                 {
-                    if (gameBoard[i,j] == (int)BoardSet.SnakeHead || gameBoard[i, j] == (int)BoardSet.SnakeBody)
+                    if (gameBoard[i,j] == CellType.SnakeHead || gameBoard[i, j] == CellType.SnakeBody)
                     {
-                        gameBoard[i, j] = (int)BoardSet.Normal;
+                        gameBoard[i, j] = CellType.Empty;
                     }
                 }
             }
@@ -101,23 +109,23 @@ namespace SnakeGame
         {
             for(int i=0; i<positions.Length; i++) 
             {
-                if (i == 0) gameBoard[positions[i].X, positions[i].Y] = (int)BoardSet.SnakeHead;
-                else gameBoard[positions[i].X, positions[i].Y] = (int)BoardSet.SnakeBody;
+                if (i == 0) gameBoard[positions[i].X, positions[i].Y] = CellType.SnakeHead;
+                else gameBoard[positions[i].X, positions[i].Y] = CellType.SnakeBody;
             }
         }
         public bool IsFood(Position Target) // 먹이 확인
         {
-            return gameBoard[Target.X, Target.Y] == (int)BoardSet.Food;
+            return gameBoard[Target.X, Target.Y] == CellType.Food;
         }
 
         private bool IsWall(Position Target) // 벽 위치 확인
         {
-            return gameBoard[Target.X, Target.Y] == (int)BoardSet.Wall;
+            return gameBoard[Target.X, Target.Y] == CellType.Wall;
         }
 
         private bool IsSnakeBody(Position Target) // 스네이크 몸체 확인
         {
-            return gameBoard[Target.X, Target.Y] == (int)BoardSet.SnakeBody;
+            return gameBoard[Target.X, Target.Y] == CellType.SnakeBody;
         }
 
         public bool IsCrash(Position Target) // 벽이거나 스네이크의 몸을 만났으면 충돌.
@@ -133,7 +141,7 @@ namespace SnakeGame
             {
                 for(int j=1; j<y; j++)
                 {
-                    if (gameBoard[i,j] == (int)BoardSet.Normal) // 빈 값 개수 확인
+                    if (gameBoard[i,j] == CellType.Empty) // 빈 값 개수 확인
                     {
                         empty_count++;
                     }
@@ -149,11 +157,11 @@ namespace SnakeGame
             {
                 for(int j=1; j<y; j++)
                 {
-                    if (gameBoard[i,j] == (int)BoardSet.Normal) // 빈칸 체크
+                    if (gameBoard[i,j] == CellType.Empty) // 빈칸 체크
                     {
                         if (index_count == next_food_index) // 랜덤으로 뽑은 칸과 일치하는 인덱스에 먹이 배치
                         {
-                            gameBoard[i, j] = (int)BoardSet.Food;
+                            gameBoard[i, j] = CellType.Food;
                             return true;
                         }
                         else
