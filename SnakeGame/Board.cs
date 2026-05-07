@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SnakeGame
+﻿namespace SnakeGame
 {
     internal class Board
     {
@@ -12,7 +6,15 @@ namespace SnakeGame
         private int x;
         private int y;
         private Random rand;
-        private string[] direction_mark = { "▲", "◀", "▼", "▶" };
+
+        public int Width
+        {
+            get { return x; }
+        }
+        public int Height
+        {
+            get { return y; }
+        }
 
         private enum CellType
         {
@@ -54,41 +56,6 @@ namespace SnakeGame
             if (x < 0 || y < 0) return false;
             if (this.x <= x || this.y <= y) return false;
             return true;
-        }
-
-        public string GetSnakeHeadMark(Direction currentDirection)
-        {
-            return direction_mark[(int)currentDirection];
-        }
-        public void PrintBoard(Direction currentDirection) // 게임 보드판 출력
-        {
-            for (int i = 0; i < x; i++)
-            {
-                for(int j = 0; j < y; j++)
-                {
-                    switch (gameBoard[i,j]) 
-                    {
-                        case CellType.Wall: // 벽
-                            Console.Write("▣");
-                            break;
-                        case CellType.Empty: // 일반 칸
-                            Console.Write("□");
-                            break;
-                        case CellType.SnakeBody: // 몸체
-                            Console.Write("■");
-                            break;
-                        case CellType.SnakeHead: // 머리
-                            Console.Write(GetSnakeHeadMark(currentDirection));
-                            break;
-                        case CellType.Food: // 음식
-                            Console.Write("●");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                Console.WriteLine();
-            }
         }
 
         public void ClearSnake() // 스네이크 경로 정리
@@ -173,6 +140,33 @@ namespace SnakeGame
             }
             return false; // Logical Error (도달 불가)
         }
+
+        //Render
+        public bool IsWall(int x, int y)
+        {
+            return gameBoard[x, y] == CellType.Wall;
+        }
+
+        public bool IsEmpty(int x, int y)
+        {
+            return gameBoard[x, y] == CellType.Empty;
+        }
+
+        public bool IsSnakeBody(int x, int y)
+        {
+            return gameBoard[x, y] == CellType.SnakeBody;
+        }
+
+        public bool IsSnakeHead(int x, int y)
+        {
+            return gameBoard[x, y] == CellType.SnakeHead;
+        }
+
+        public bool IsFood(int x, int y)
+        {
+            return gameBoard[x, y] == CellType.Food;
+        }
+
     }
         
 }
