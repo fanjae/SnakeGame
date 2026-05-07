@@ -4,25 +4,28 @@
     {
         private Board gameBoard;
         private Snake snake;
+        private ConsoleRenderer renderer;
         
         public void InitGame() // 게임 초기화
         {
             gameBoard = new Board(16, 16);
             snake = new Snake(8, 8);
+            renderer = new ConsoleRenderer();
 
             gameBoard.UpdateSnakeBoard(snake.GetBodyPositions());
             gameBoard.CreateFood();
 
             Console.Clear();
             Console.SetCursorPosition(0, 0);
-            gameBoard.PrintBoard(snake.CurrentDirection);
+            renderer.Render(gameBoard, snake.CurrentDirection);
         }
         public void RenderBoard() // 보드 렌더링 요청
         {
             gameBoard.ClearSnake();
             gameBoard.UpdateSnakeBoard(snake.GetBodyPositions());
+
             Console.SetCursorPosition(0, 0); // 커서 고정으로 출력 상태 유지
-            gameBoard.PrintBoard(snake.CurrentDirection);
+            renderer.Render(gameBoard, snake.CurrentDirection);
         }
         public void PlayGame()
         {
