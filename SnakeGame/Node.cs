@@ -12,19 +12,19 @@
             next = null;
         }
 
-        public Node Prev
+        public Node Prev // 이전값 프로퍼티
         {
             get { return prev; }
             set { prev = value; }
         }
 
-        public Node Next
+        public Node Next // 다음값 프로퍼티
         {
             get { return next; }
             set { next = value; }
         }
 
-        public Position NodePos
+        public Position NodePos // 위치값 프로퍼티
         {
             get { return nodePos; }
         }
