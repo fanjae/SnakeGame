@@ -16,15 +16,6 @@
             get { return y; }
         }
 
-        private enum CellType
-        {
-            Wall,
-            Empty,
-            SnakeBody,
-            SnakeHead,
-            Food
-        }
-
         public Board(int x, int y)
         {
             gameBoard = new CellType[x, y];
@@ -33,6 +24,11 @@
             rand = new Random();
 
             InitializeBoardWallSet();
+        }
+
+        public CellType GetCellType(int x, int y) // Cell Type 획득
+        {
+            return gameBoard[x, y];
         }
         private void InitializeBoardWallSet() // 보드 벽 초기화(보드 생성시에만 활용)
         {
@@ -140,33 +136,6 @@
             }
             return false; // Logical Error (도달 불가)
         }
-
-        //Render
-        public bool IsWall(int x, int y)
-        {
-            return gameBoard[x, y] == CellType.Wall;
-        }
-
-        public bool IsEmpty(int x, int y)
-        {
-            return gameBoard[x, y] == CellType.Empty;
-        }
-
-        public bool IsSnakeBody(int x, int y)
-        {
-            return gameBoard[x, y] == CellType.SnakeBody;
-        }
-
-        public bool IsSnakeHead(int x, int y)
-        {
-            return gameBoard[x, y] == CellType.SnakeHead;
-        }
-
-        public bool IsFood(int x, int y)
-        {
-            return gameBoard[x, y] == CellType.Food;
-        }
-
     }
         
 }

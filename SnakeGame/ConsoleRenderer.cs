@@ -16,15 +16,30 @@
                 Console.WriteLine();
             }
         }
-        private string GetCellMark(Board board, int x, int y, Direction currentDirection)
+        private string GetCellMark(Board board, int x, int y, Direction currentDirection) // 셀 마크를 받아 출력 문자로 변환
         {
-            if (board.IsWall(x, y)) return "▣";
-            if (board.IsEmpty(x, y)) return "□";
-            if (board.IsSnakeBody(x, y)) return "■";
-            if (board.IsSnakeHead(x, y)) return directionMarks[(int)currentDirection];
-            if (board.IsFood(x, y)) return "●";
+            CellType cellType = board.GetCellType(x, y); // 셀 상태를 받아옴
 
-            return "?";
+            switch (cellType)
+            {
+                case CellType.Wall:
+                    return "▣";
+
+                case CellType.Empty:
+                    return "□";
+
+                case CellType.SnakeBody:
+                    return "■";
+
+                case CellType.SnakeHead:
+                    return directionMarks[(int)currentDirection];
+
+                case CellType.Food:
+                    return "●";
+
+                default:
+                    return "?";
+            }
         }
 
     }
