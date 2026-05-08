@@ -100,9 +100,9 @@
             int empty_count = 0;
             int index_count = 0;
             int next_food_index = 0;
-            for(int i=1; i<x; i++)
+            for(int i=1; i<x-1; i++)
             {
-                for(int j=1; j<y; j++)
+                for(int j=1; j<y-1; j++)
                 {
                     if (gameBoard[i,j] == CellType.Empty) // 빈 값 개수 확인
                     {
@@ -116,9 +116,9 @@
             }
 
             next_food_index = rand.Next(empty_count);
-            for(int i=1; i<x; i++)
+            for(int i=1; i<x-1; i++)
             {
-                for(int j=1; j<y; j++)
+                for(int j=1; j<y-1; j++)
                 {
                     if (gameBoard[i,j] == CellType.Empty) // 빈칸 체크
                     {
