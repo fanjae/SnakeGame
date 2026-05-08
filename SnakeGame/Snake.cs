@@ -1,7 +1,4 @@
-﻿
-using System.ComponentModel;
-
-namespace SnakeGame
+﻿namespace SnakeGame
 {
     internal class Snake
     {
